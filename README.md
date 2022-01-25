@@ -2,7 +2,12 @@
 
 Secure Storage a secure way to store localStorage data with high level of encryption.
 
-<!-- **[LIVE DEMO](http://softvar.github.io/secure-ls#live-demo)** -->
+A fork of [softvar/secure-ls](https://github.com/softvar/secure-ls), this library does not include compression and all the interfaces are changed.
+The library use fingerprint and secure cookie to store the encryption key. It does not expose the keys to the console.
+
+## Todo
+* Update readme
+* Create unit tests
 
 ## Features
 
