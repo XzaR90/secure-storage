@@ -5,12 +5,10 @@ before_install:
   - npm install -g webpack
 install:
   - npm install
-  - npm run build-dev
   - npm run build
 script:
-  - npm run build-test
-  - npm run coverage
-after_success: 'npm run coveralls'
+  - npm run test
+after_success: 'npm run coverage'
 cache:
   directories:
     - node_modules
