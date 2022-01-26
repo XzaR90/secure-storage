@@ -4,13 +4,17 @@
     "description": "Demo for secure-storage npm package",
     "main": "index.js",
     "scripts": {
-        "start": "serve -s wwwroot -p 1337 --ssl-cert %INIT_CWD%/.certs/localhost.crt --ssl-key %INIT_CWD%/.certs/localhost.key"
+        "build": "webpack -mode development",
+        "start": "webpack -mode development && serve -s wwwroot -p 1337 --ssl-cert %INIT_CWD%/.certs/localhost.crt --ssl-key %INIT_CWD%/.certs/localhost.key"
     },
     "dependencies": {
         "@xzar90/secure-storage": "file:../xzar90-secure-storage-2.0.0.tgz"
     },
     "devDependencies": {
-        "serve": "^13.0.2"
+        "copy-webpack-plugin": "^10.2.1",
+        "serve": "^13.0.2",
+        "webpack": "^5.67.0",
+        "webpack-cli": "^4.9.2"
     },
     "author": "Xzar90, Josh Gomez",
     "license": "MIT"
