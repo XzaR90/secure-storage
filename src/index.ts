@@ -146,6 +146,10 @@ class SecureStorage {
 
     private setCryptoMethods() {
         switch (this.config.encodingType) {
+            case EncodingType.TDES:
+                this._encrypt = CryptoES.TripleDES.encrypt;
+                this._decrypt = CryptoES.TripleDES.decrypt;
+                break;
             case EncodingType.DES:
                 this._encrypt = CryptoES.DES.encrypt;
                 this._decrypt = CryptoES.DES.decrypt;

@@ -3,59 +3,54 @@
 Secure Storage a secure way to store localStorage data with high level of encryption.
 
 A fork of [softvar/secure-ls](https://github.com/softvar/secure-ls), this library does not include compression and all the interfaces are changed.
-The library use fingerprint and secure cookie to store the encryption key. It does not expose the keys to the console.
-
-## Todo
-* Update readme
-* Create unit tests
+The library use fingerprint and secure cookie to store the encryption key. It does not expose the keys to the console. If you use custom key you must enclose it yourself.
 
 ## Features
 
--   Secure data with various types of encryption including `AES`, `DES`, `Rabbit` and `RC4`. (defaults to `AES` encoding).
+-   Secure data with various types of encryption including `AES`, `TDES`, `DES`, `Rabbit` and `RC4`. (defaults to `AES` encoding).
 -   Advanced API wrapper over `localStorage` API, providing other basic utilities.
 
 ## Installation
 
 ```
-todo
+npm install @xzar90/secure-storage
 ```
-
-## Libraries used
 
 ## Usage
 
-```
-todo
+```ts
+import SecureStorage from '@xzar90/secure-storage';
+
+const secureStorage = await SecureStorage.createAsync({}); //default settings
+//{
+//    encodingType: 'aes',              //  aes | tdes | des | rabbit | rc4
+//    encryptionSecret: undefined,      //  Leave empty to generate random which is
+//                                          stored in a secure cookie.
+//    storageNamespace: 'secure'        //  the value which is used to track all
+//                                          storage keys.
+//}
+
+secureStorage.clear(); //Clear all the values from storageNamespace
+secureStorage.setItem(key, value); //Set item
+secureStorage.getItem(key); //Get item
+secureStorage.removeItem(key); //Remove item
 ```
 
-## API Documentation
-
-#### Create an instance / reference before using.
-
-```
-todo
-```
+You cannot change settings once you have created a instance of SecureStorage.
 
 ## Scripts
 
 -   `npm run build` - produces production version of the library under the `dist` folder
--   `npm run test` - well ... it runs the tests :)
 
 ## Contributing
 
 1. Fork the repo on GitHub.
-2. Clone the repo on machine.
-3. Execute `npm install` and `npm run dev`.
-4. Create a new branch `<fix-typo>` and do your work.
-5. Run `npm run build` to build dist files and `npm run test` to ensure all test cases are passing.
-6. Commit your changes to the branch.
-7. Submit a Pull request.
 
 ## Copyright and license
 
 > The [MIT license](https://opensource.org/licenses/MIT) (MIT)
 >
-> Copyright (c) 2015-2016 Josh Gomez
+> Copyright (c) 2022 Josh Gomez
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 >
