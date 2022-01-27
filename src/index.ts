@@ -197,4 +197,4 @@ class SecureStorageFactory implements ISecureStorageFactory {
     }
 }
 
-export default new SecureStorageFactory() as ISecureStorageFactory;
+export default new SecureStorageFactory();

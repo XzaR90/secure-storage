@@ -11,8 +11,9 @@ export default [
             name: 'SecureStorage', // package name
             file: 'dist/secure-storage.min.js',
             format: 'iife',
+            sourcemap: true,
         },
-        plugins: [resolve(), typescript({ declaration: true }), terser()],
+        plugins: [resolve(), typescript({ tsconfig: './tsconfig.json' }), terser()],
     },
     {
         input: 'src/index.ts', // your entry point
@@ -20,15 +21,16 @@ export default [
             name: pkg.name, // package name
             file: pkg.browser,
             format: 'umd',
+            sourcemap: true,
         },
-        plugins: [resolve(), commonjs(), typescript({ declaration: true }), terser()],
+        plugins: [resolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' }), terser()],
     },
     {
         input: 'src/index.ts', // your entry point
         output: [
-            { file: pkg.main, format: 'cjs', exports: 'default' },
-            { file: pkg.module, format: 'es', exports: 'default' },
+            { file: pkg.main, format: 'cjs', exports: 'default', sourcemap: true },
+            { file: pkg.module, format: 'es', exports: 'default', sourcemap: true },
         ],
-        plugins: [typescript({ declaration: true }), terser()],
+        plugins: [typescript({ tsconfig: './tsconfig.json' }), terser()],
     },
 ];

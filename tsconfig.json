@@ -19,8 +19,9 @@
         "allowSyntheticDefaultImports": true,
         "declaration": true,
         "outDir": "dist",
-        "declarationDir": "types",
-        "baseUrl": "."
+        "baseUrl": ".",
+        "declarationDir": "./",
+        "sourceMap": true
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "demo"]

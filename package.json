@@ -1,20 +1,21 @@
 {
     "name": "@xzar90/secure-storage",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Secure localStorage data with high level of encryption",
     "main": "dist/secure-storage.cjs.js",
     "module": "dist/secure-storage.esm.js",
     "browser": "dist/secure-storage.umd.js",
-    "types": "types/index.d.ts",
+    "types": "dist/index.d.ts",
     "type": "module",
     "files": [
         "dist",
         "LICENSE",
         "README.md",
-        "types"
+        "types",
+        "src"
     ],
     "scripts": {
-        "build": "rollup -c & npx tsc -p tsconfig.json --emitDeclarationOnly"
+        "build": "rollup -c"
     },
     "devDependencies": {
         "@rollup/plugin-typescript": "^8.3.0",
