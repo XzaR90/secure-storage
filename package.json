@@ -1,6 +1,6 @@
 {
     "name": "@xzar90/secure-storage",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Secure localStorage data with high level of encryption",
     "main": "dist/secure-storage.cjs.js",
     "module": "dist/secure-storage.esm.js",
@@ -43,7 +43,7 @@
     "author": "XzaR90, Josh Gomez",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/softvar/secure-ls/issues"
+        "url": "https://github.com/XzaR90/secure-storage/issues"
     },
     "homepage": "https://github.com/xzar90/secure-storage",
     "dependencies": {

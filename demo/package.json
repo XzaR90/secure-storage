@@ -8,7 +8,7 @@
         "start": "serve -s wwwroot -p 1337 --ssl-cert %INIT_CWD%/.certs/localhost.crt --ssl-key %INIT_CWD%/.certs/localhost.key"
     },
     "dependencies": {
-        "@xzar90/secure-storage": "file:../xzar90-secure-storage-2.0.0.tgz"
+        "@xzar90/secure-storage": "file:../xzar90-secure-storage-2.0.1.tgz"
     },
     "devDependencies": {
         "copy-webpack-plugin": "^10.2.1",
