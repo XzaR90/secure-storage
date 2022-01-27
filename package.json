@@ -50,5 +50,10 @@
         "@fingerprintjs/fingerprintjs": "^3.3.2",
         "crypto-es": "^1.2.7",
         "js-cookie": "^3.0.1"
+    },
+    "optionalDependencies": {
+        "@fingerprintjs/fingerprintjs": "^3.3.2",
+        "crypto-es": "^1.2.7",
+        "js-cookie": "^3.0.1"
     }
 }
