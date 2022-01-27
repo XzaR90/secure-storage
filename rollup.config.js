@@ -1,36 +1,47 @@
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
 import dts from 'rollup-plugin-dts';
-import esbuild from 'rollup-plugin-esbuild';
+import { terser } from 'rollup-plugin-terser';
+import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 
-const name = pkg.main.replace(/\.js$/, '');
-
-const bundle = (config) => ({
-    ...config,
-    input: 'src/index.ts',
-    external: (id) => !/^[./]/.test(id),
-});
-
 export default [
-    bundle({
-        plugins: [esbuild()],
+    {
+        input: 'src/index.ts',
         output: [
             {
-                file: `${name}.js`,
+                file: pkg.main,
                 format: 'cjs',
+                exports: 'default',
                 sourcemap: true,
             },
             {
-                file: `${name}.mjs`,
+                file: pkg.module,
                 format: 'es',
+                exports: 'named',
+                sourcemap: true,
+            },
+            {
+                file: pkg.browser,
+                name: 'SecureStorage',
+                format: 'umd',
                 sourcemap: true,
             },
         ],
-    }),
-    bundle({
+        external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+        plugins: [
+            resolve(),
+            commonjs(),
+            typescript({
+                typescript: require('typescript'),
+                useTsconfigDeclarationDir: true,
+            }),
+            terser(),
+        ],
+    },
+    {
+        input: './dist/dts/index.d.ts',
+        output: [{ file: pkg.types, format: 'es' }],
         plugins: [dts()],
-        output: {
-            file: `${name}.d.ts`,
-            format: 'es',
-        },
-    }),
+    },
 ];

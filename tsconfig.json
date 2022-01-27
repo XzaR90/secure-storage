@@ -18,11 +18,12 @@
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
         "declaration": true,
+        "declarationDir": "dist/dts",
         "outDir": "dist",
         "baseUrl": ".",
-        "declarationDir": "./",
         "sourceMap": true
     },
-    "include": ["src/**/*"],
+    "files": ["src/index.ts"],
+    "include": ["src"],
     "exclude": ["node_modules", "demo"]
 }

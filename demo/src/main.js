@@ -1,3 +1,9 @@
+require('@fingerprintjs/fingerprintjs');
+require('js-cookie');
+require('crypto-es');
+
+const SecureStorage = require('@xzar90/secure-storage');
+
 console.log(SecureStorage);
 SecureStorage.createAsync().then((storage) => {
     console.log('value: ', storage.getItem('hello'), ': it is working if the value "hello" are shown on next refresh!');

@@ -2,8 +2,9 @@ import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import CryptoES from 'crypto-es';
 import Cookies from 'js-cookie';
 import { EncodingType } from './enums/EncodingType';
-import generateSecretKey, { generateSecretKeyWithSalt } from './helpers/generateSecretKey';
+import { generateSecretKey, generateSecretKeyWithSalt } from './helpers/generateSecretKey';
 import { IEncryptionConfig } from './interfaces/IEncryptionConfig';
+import { IKeySaltPair } from './interfaces/IKeySaltPair';
 import { ISecureStorage } from './interfaces/ISecureStorage';
 import { ISecureStorageConfig } from './interfaces/ISecureStorageConfig';
 import { ISecureStorageConfigBase } from './interfaces/ISecureStorageConfigBase';
@@ -184,7 +185,7 @@ class SecureStorage {
 }
 
 class SecureStorageFactory implements ISecureStorageFactory {
-    generateSecretKeyWithSalt = generateSecretKeyWithSalt;
+    generateSecretKeyWithSalt: (secretPhrase: string, saltAsHex?: string) => IKeySaltPair = generateSecretKeyWithSalt;
     async createAsync(config: Partial<ISecureStorageConfig>): Promise<ISecureStorage> {
         const secureStorage = new SecureStorage(config);
         await secureStorage.initAsync();

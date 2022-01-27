@@ -1,9 +1,10 @@
 {
     "name": "@xzar90/secure-storage",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "description": "Secure localStorage data with high level of encryption",
     "main": "dist/secure-storage.cjs.js",
     "module": "dist/secure-storage.cjs.mjs",
+    "browser": "dist/secure-storage.umd.js",
     "types": "dist/secure-storage.cjs.d.ts",
     "type": "module",
     "files": [
@@ -14,9 +15,11 @@
         "src"
     ],
     "scripts": {
-        "build": "rimraf dist && rollup -c"
+        "build": "rimraf dist && rollup -c && rimraf dist/dts"
     },
     "devDependencies": {
+        "@rollup/plugin-node-resolve": "^13.1.3",
+        "@rollup/plugin-commonjs": "^21.0.1",
         "@types/js-cookie": "^3.0.1",
         "@typescript-eslint/eslint-plugin": "^5.10.0",
         "@typescript-eslint/parser": "^5.10.0",
@@ -24,11 +27,12 @@
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^4.0.0",
         "prettier": "^2.5.1",
+        "rimraf": "^3.0.2",
         "rollup": "^2.65.0",
         "rollup-plugin-dts": "^4.1.0",
-        "rollup-plugin-esbuild": "^4.8.2",
-        "typescript": "^4.5.4",
-        "rimraf": "^3.0.2"
+        "rollup-plugin-terser": "^7.0.2",
+        "rollup-plugin-typescript2": "^0.31.1",
+        "typescript": "^4.5.4"
     },
     "repository": {
         "type": "git",
@@ -46,13 +50,13 @@
     },
     "homepage": "https://github.com/xzar90/secure-storage",
     "dependencies": {
-        "@fingerprintjs/fingerprintjs": "^3.3.2",
-        "crypto-es": "^1.2.7",
-        "js-cookie": "^3.0.1"
+        "@fingerprintjs/fingerprintjs": ">= 3.3.2",
+        "crypto-es": ">= 1.2.7",
+        "js-cookie": ">= 3.0.1"
     },
-    "optionalDependencies": {
-        "@fingerprintjs/fingerprintjs": "^3.3.2",
-        "crypto-es": "^1.2.7",
-        "js-cookie": "^3.0.1"
+    "peerDependencies": {
+        "@fingerprintjs/fingerprintjs": ">= 3.3.2",
+        "crypto-es": ">= 1.2.7",
+        "js-cookie": ">= 3.0.1"
     }
 }

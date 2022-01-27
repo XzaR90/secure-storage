@@ -8,7 +8,10 @@
         "start": "serve -s wwwroot -p 1337 --ssl-cert %INIT_CWD%/.certs/localhost.crt --ssl-key %INIT_CWD%/.certs/localhost.key"
     },
     "dependencies": {
-        "@xzar90/secure-storage": "file:../xzar90-secure-storage-2.0.2.tgz"
+        "@xzar90/secure-storage": "file:../xzar90-secure-storage-2.0.4.tgz",
+        "@fingerprintjs/fingerprintjs": "^3.3.2",
+        "crypto-es": "^1.2.7",
+        "js-cookie": "^3.0.1"
     },
     "devDependencies": {
         "copy-webpack-plugin": "^10.2.1",
