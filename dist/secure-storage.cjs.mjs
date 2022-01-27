@@ -1,29 +1,20 @@
-'use strict';
-
-var FingerprintJS = require('@fingerprintjs/fingerprintjs');
-var CryptoES = require('crypto-es');
-var Cookies = require('js-cookie');
-var EncodingType_ts = require('./enums/EncodingType.ts');
-var generateSecretKey = require('./helpers/generateSecretKey.ts');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var FingerprintJS__default = /*#__PURE__*/_interopDefaultLegacy(FingerprintJS);
-var CryptoES__default = /*#__PURE__*/_interopDefaultLegacy(CryptoES);
-var Cookies__default = /*#__PURE__*/_interopDefaultLegacy(Cookies);
-var generateSecretKey__default = /*#__PURE__*/_interopDefaultLegacy(generateSecretKey);
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import CryptoES from 'crypto-es';
+import Cookies from 'js-cookie';
+import { EncodingType } from './enums/EncodingType.ts';
+import generateSecretKey, { generateSecretKeyWithSalt } from './helpers/generateSecretKey.ts';
 
 class SecureStorage {
   static browserFingerPrint;
-  _encrypt = CryptoES__default["default"].AES.encrypt;
-  _decrypt = CryptoES__default["default"].AES.decrypt;
+  _encrypt = CryptoES.AES.encrypt;
+  _decrypt = CryptoES.AES.decrypt;
   _isInitialized = false;
   _storage = window?.localStorage ?? localStorage;
   _encryptionSecret = {
     expires: 90
   };
   config = {
-    encodingType: EncodingType_ts.EncodingType.AES,
+    encodingType: EncodingType.AES,
     storageNamespace: "secure"
   };
   constructor(config) {
@@ -36,7 +27,7 @@ class SecureStorage {
       return;
     }
     if (!SecureStorage.browserFingerPrint) {
-      const fp = await FingerprintJS__default["default"].load();
+      const fp = await FingerprintJS.load();
       const result = await fp.get();
       SecureStorage.browserFingerPrint = result.visitorId;
       Object.freeze(SecureStorage.browserFingerPrint);
@@ -61,7 +52,7 @@ class SecureStorage {
       return null;
     }
     const decryptedValue = this._decrypt(encodedItem, this._encryptionSecret.key);
-    const strValue = decryptedValue.toString(CryptoES__default["default"].enc.Utf8);
+    const strValue = decryptedValue.toString(CryptoES.enc.Utf8);
     try {
       return JSON.parse(strValue);
     } catch (e) {
@@ -104,24 +95,24 @@ class SecureStorage {
       throw new Error("Secure Storage: Browser finger print is not set.");
     }
     if (!salt) {
-      const secret = generateSecretKey__default["default"](SecureStorage.browserFingerPrint);
+      const secret = generateSecretKey(SecureStorage.browserFingerPrint);
       this.setSaltToSecurePlace(secret);
       this._encryptionSecret.key = secret.key;
       Object.freeze(this._encryptionSecret);
       return;
     }
-    this._encryptionSecret.key = generateSecretKey.generateSecretKeyWithSalt(SecureStorage.browserFingerPrint, salt).key;
+    this._encryptionSecret.key = generateSecretKeyWithSalt(SecureStorage.browserFingerPrint, salt).key;
     Object.freeze(this._encryptionSecret);
   }
   setSaltToSecurePlace(secret) {
-    Cookies__default["default"].set(this.metaKey, secret.salt, {
+    Cookies.set(this.metaKey, secret.salt, {
       secure: true,
       sameSite: "Strict",
       expires: this._encryptionSecret.expires
     });
   }
   getSaltOrDefaultFromSecurePlace() {
-    return Cookies__default["default"].get(this.metaKey);
+    return Cookies.get(this.metaKey);
   }
   setConfig(config) {
     this.config.encodingType = config?.encodingType ?? this.config.encodingType;
@@ -138,31 +129,31 @@ class SecureStorage {
   }
   setCryptoMethods() {
     switch (this.config.encodingType) {
-      case EncodingType_ts.EncodingType.TDES:
-        this._encrypt = CryptoES__default["default"].TripleDES.encrypt;
-        this._decrypt = CryptoES__default["default"].TripleDES.decrypt;
+      case EncodingType.TDES:
+        this._encrypt = CryptoES.TripleDES.encrypt;
+        this._decrypt = CryptoES.TripleDES.decrypt;
         break;
-      case EncodingType_ts.EncodingType.DES:
-        this._encrypt = CryptoES__default["default"].DES.encrypt;
-        this._decrypt = CryptoES__default["default"].DES.decrypt;
+      case EncodingType.DES:
+        this._encrypt = CryptoES.DES.encrypt;
+        this._decrypt = CryptoES.DES.decrypt;
         break;
-      case EncodingType_ts.EncodingType.Rabbit:
-        this._encrypt = CryptoES__default["default"].Rabbit.encrypt;
-        this._decrypt = CryptoES__default["default"].Rabbit.decrypt;
+      case EncodingType.Rabbit:
+        this._encrypt = CryptoES.Rabbit.encrypt;
+        this._decrypt = CryptoES.Rabbit.decrypt;
         break;
-      case EncodingType_ts.EncodingType.RC4:
-        this._encrypt = CryptoES__default["default"].RC4.encrypt;
-        this._decrypt = CryptoES__default["default"].RC4.decrypt;
+      case EncodingType.RC4:
+        this._encrypt = CryptoES.RC4.encrypt;
+        this._decrypt = CryptoES.RC4.decrypt;
         break;
-      case EncodingType_ts.EncodingType.AES:
-        this._encrypt = CryptoES__default["default"].AES.encrypt;
-        this._decrypt = CryptoES__default["default"].AES.decrypt;
+      case EncodingType.AES:
+        this._encrypt = CryptoES.AES.encrypt;
+        this._decrypt = CryptoES.AES.decrypt;
         break;
     }
   }
 }
 class SecureStorageFactory {
-  generateSecretKeyWithSalt = generateSecretKey.generateSecretKeyWithSalt;
+  generateSecretKeyWithSalt = generateSecretKeyWithSalt;
   async createAsync(config) {
     const secureStorage = new SecureStorage(config);
     await secureStorage.initAsync();
@@ -176,5 +167,5 @@ class SecureStorageFactory {
 }
 var index = new SecureStorageFactory();
 
-module.exports = index;
-//# sourceMappingURL=secure-storage.cjs.js.map
+export { index as default };
+//# sourceMappingURL=secure-storage.cjs.mjs.map
