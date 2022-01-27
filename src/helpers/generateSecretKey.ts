@@ -1,6 +1,7 @@
 import CryptoES from 'crypto-es';
+import { IKeySaltPair } from 'src/interfaces/IKeySaltPair';
 
-export const generateSecretKeyWithSalt = (secretPhrase: string, saltAsHex?: string) => {
+export const generateSecretKeyWithSalt = (secretPhrase: string, saltAsHex?: string): IKeySaltPair => {
     let salt = CryptoES.lib.WordArray.random(128 / 8);
     if (saltAsHex) {
         salt = CryptoES.enc.Hex.parse(saltAsHex);

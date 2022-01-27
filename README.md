@@ -24,16 +24,18 @@ import SecureStorage from '@xzar90/secure-storage';
 const secureStorage = await SecureStorage.createAsync({}); //default settings
 //{
 //    encodingType: 'aes',              //  aes | tdes | des | rabbit | rc4
-//    encryptionSecret: undefined,      //  Leave empty to generate random which is
-//                                          stored in a secure cookie.
+//    encryptionSecret: {
+//      key: undefined,                 //  Leave empty to generate random which is
+//      expires: 90                     //  stored in a secure cookie for 90 days.
+//    },
 //    storageNamespace: 'secure'        //  the value which is used to track all
 //                                          storage keys.
 //}
 
 secureStorage.clear(); //Clear all the values from storageNamespace
-secureStorage.setItem(key, value); //Set item
-secureStorage.getItem(key); //Get item
-secureStorage.removeItem(key); //Remove item
+secureStorage.setItem(key, value);
+secureStorage.getItem(key);
+secureStorage.removeItem(key);
 ```
 
 You cannot change settings once you have created a instance of SecureStorage.

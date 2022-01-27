@@ -3,9 +3,11 @@ import CryptoES from 'crypto-es';
 import Cookies from 'js-cookie';
 import { EncodingType } from './enums/EncodingType';
 import generateSecretKey, { generateSecretKeyWithSalt } from './helpers/generateSecretKey';
+import { IEncryptionConfig } from './interfaces/IEncryptionConfig';
 import { ISecureStorage } from './interfaces/ISecureStorage';
 import { ISecureStorageConfig } from './interfaces/ISecureStorageConfig';
 import { ISecureStorageConfigBase } from './interfaces/ISecureStorageConfigBase';
+import { ISecureStorageFactory } from './interfaces/ISecureStorageFactory';
 
 class SecureStorage {
     private static browserFingerPrint?: string;
@@ -13,7 +15,9 @@ class SecureStorage {
     private _decrypt = CryptoES.AES.decrypt;
     private _isInitialized = false;
     private _storage: Storage = window?.localStorage ?? localStorage;
-    private _encryptionSecret?: string;
+    private _encryptionSecret: IEncryptionConfig = {
+        expires: 90,
+    };
 
     config: ISecureStorageConfigBase = {
         encodingType: EncodingType.AES,
@@ -26,7 +30,7 @@ class SecureStorage {
     }
 
     initAsync = async () => {
-        if (this._encryptionSecret !== undefined) {
+        if (this._encryptionSecret.key !== undefined) {
             this._isInitialized = true;
             return;
         }
@@ -61,7 +65,7 @@ class SecureStorage {
             return null;
         }
 
-        const decryptedValue = this._decrypt(encodedItem, this._encryptionSecret);
+        const decryptedValue = this._decrypt(encodedItem, this._encryptionSecret.key);
         const strValue = decryptedValue.toString(CryptoES.enc.Utf8);
         try {
             return JSON.parse(strValue);
@@ -84,7 +88,7 @@ class SecureStorage {
             strValue = JSON.stringify(value);
         }
 
-        const encryptedValue = this._encrypt(strValue, this._encryptionSecret);
+        const encryptedValue = this._encrypt(strValue, this._encryptionSecret.key);
         this._storage.setItem(key, encryptedValue.toString());
     };
 
@@ -117,17 +121,21 @@ class SecureStorage {
         if (!salt) {
             const secret = generateSecretKey(SecureStorage.browserFingerPrint);
             this.setSaltToSecurePlace(secret);
-            this._encryptionSecret = secret.key;
+            this._encryptionSecret.key = secret.key;
             Object.freeze(this._encryptionSecret);
             return;
         }
 
-        this._encryptionSecret = generateSecretKeyWithSalt(SecureStorage.browserFingerPrint, salt).key;
+        this._encryptionSecret.key = generateSecretKeyWithSalt(SecureStorage.browserFingerPrint, salt).key;
         Object.freeze(this._encryptionSecret);
     }
 
     private setSaltToSecurePlace(secret: { key: string; salt: string }) {
-        Cookies.set(this.metaKey, secret.salt, { secure: true, sameSite: 'Strict' });
+        Cookies.set(this.metaKey, secret.salt, {
+            secure: true,
+            sameSite: 'Strict',
+            expires: this._encryptionSecret.expires,
+        });
     }
 
     private getSaltOrDefaultFromSecurePlace() {
@@ -137,10 +145,15 @@ class SecureStorage {
     private setConfig(config: Partial<ISecureStorageConfig>) {
         this.config.encodingType = config?.encodingType ?? this.config.encodingType;
         this.config.storageNamespace = config?.storageNamespace ?? this.config.storageNamespace;
+        this.setConfigSecret(config);
+    }
 
+    private setConfigSecret(config: Partial<ISecureStorageConfig>) {
         if (config?.encryptionSecret !== undefined) {
             this._encryptionSecret = config.encryptionSecret;
-            Object.freeze(this._encryptionSecret);
+            if (this._encryptionSecret.key) {
+                Object.freeze(this._encryptionSecret);
+            }
         }
     }
 
@@ -170,8 +183,9 @@ class SecureStorage {
     }
 }
 
-export default class SecureStorageFactory {
-    static async createAsync(config: Partial<ISecureStorageConfig>): Promise<ISecureStorage> {
+class SecureStorageFactory implements ISecureStorageFactory {
+    generateSecretKeyWithSalt = generateSecretKeyWithSalt;
+    async createAsync(config: Partial<ISecureStorageConfig>): Promise<ISecureStorage> {
         const secureStorage = new SecureStorage(config);
         await secureStorage.initAsync();
         return {
@@ -182,3 +196,5 @@ export default class SecureStorageFactory {
         };
     }
 }
+
+export default new SecureStorageFactory() as ISecureStorageFactory;

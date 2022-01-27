@@ -1,5 +1,3 @@
-import { ISecureStorage } from './interfaces/ISecureStorage';
-import { ISecureStorageConfig } from './interfaces/ISecureStorageConfig';
-export default class SecureStorageFactory {
-    static createAsync(config: Partial<ISecureStorageConfig>): Promise<ISecureStorage>;
-}
+import { ISecureStorageFactory } from './interfaces/ISecureStorageFactory';
+declare const _default: ISecureStorageFactory;
+export default _default;
