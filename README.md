@@ -1,5 +1,7 @@
 # Secure Storage
 
+[![Publish](https://github.com/XzaR90/secure-storage/actions/workflows/publish.yml/badge.svg)](https://github.com/XzaR90/secure-storage/actions/workflows/publish.yml)
+
 Secure Storage a secure way to store localStorage data with high level of encryption.
 
 A fork of [softvar/secure-ls](https://github.com/softvar/secure-ls), this library does not include compression and all the interfaces are changed.
