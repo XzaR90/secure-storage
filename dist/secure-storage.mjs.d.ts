@@ -61,6 +61,7 @@ declare class SecureStorageFactory implements ISecureStorageFactory {
     generateSecretKeyWithSalt: (secretPhrase: string, saltAsHex?: string) => IKeySaltPair;
     createAsync(config: Partial<ISecureStorageConfig>): Promise<ISecureStorage>;
 }
-declare const factory: SecureStorageFactory;
 
-export { factory as default };
+declare const SecureStorage: SecureStorageFactory;
+
+export { SecureStorage };

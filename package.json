@@ -1,6 +1,6 @@
 {
     "name": "@xzar90/secure-storage",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "description": "Secure localStorage data with high level of encryption",
     "main": "dist/secure-storage.cjs.js",
     "module": "dist/secure-storage.mjs",
