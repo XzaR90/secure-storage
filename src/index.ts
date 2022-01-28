@@ -198,4 +198,7 @@ class SecureStorageFactory implements ISecureStorageFactory {
     }
 }
 
-export default new SecureStorageFactory();
+const factory = new SecureStorageFactory();
+export default factory;
+exports['default'] = factory;
+module.exports = exports['default'];

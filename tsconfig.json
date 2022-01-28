@@ -25,5 +25,5 @@
     },
     "files": ["src/index.ts"],
     "include": ["src"],
-    "exclude": ["node_modules", "demo"]
+    "exclude": ["node_modules", "demo", "dist"]
 }

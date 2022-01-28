@@ -12,7 +12,7 @@ export default [
             {
                 file: pkg.main,
                 format: 'cjs',
-                exports: 'default',
+                exports: 'auto',
                 sourcemap: true,
             },
             {
@@ -35,6 +35,10 @@ export default [
             typescript({
                 typescript: require('typescript'),
                 useTsconfigDeclarationDir: true,
+            }),
+            commonjs({
+                exclude: 'node_modules',
+                ignoreGlobal: true,
             }),
             terser(),
         ],
