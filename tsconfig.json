@@ -23,7 +23,7 @@
         "baseUrl": ".",
         "sourceMap": true
     },
-    "files": ["src/index.ts"],
+    "files": ["src/SecureStorageFactory.ts"],
     "include": ["src"],
     "exclude": ["node_modules", "demo", "dist"]
 }
