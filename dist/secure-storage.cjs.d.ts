@@ -25,11 +25,11 @@ interface IEncryptionConfig {
 }
 
 declare enum EncodingType {
-    AES = "aes",
-    DES = "des",
-    TDES = "tdes",
-    Rabbit = "rabbit",
-    RC4 = "rc4"
+    AES = 'aes',
+    DES = 'des',
+    TDES = 'tdes',
+    Rabbit = 'rabbit',
+    RC4 = 'rc4',
 }
 
 interface ISecureStorageConfigBase {
@@ -58,6 +58,7 @@ interface ISecureStorageFactory {
 }
 
 declare class SecureStorageFactory implements ISecureStorageFactory {
+    static defaultInstance: SecureStorageFactory;
     generateSecretKeyWithSalt: (secretPhrase: string, saltAsHex?: string) => IKeySaltPair;
     createAsync(config: Partial<ISecureStorageConfig>): Promise<ISecureStorage>;
 }
