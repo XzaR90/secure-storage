@@ -1,4 +1,5 @@
 # Secure Storage
+
 [![npm version](https://img.shields.io/npm/v/@xzar90/secure-storage.svg)](https://www.npmjs.com/package/@xzar90/secure-storage) [![npm](https://img.shields.io/npm/dm/@xzar90/secure-storage.svg)](https://www.npmjs.com/package/@xzar90/secure-storage)
 [![Publish](https://github.com/XzaR90/secure-storage/actions/workflows/publish.yml/badge.svg)](https://github.com/XzaR90/secure-storage/actions/workflows/publish.yml)
 [![CodeQL](https://github.com/XzaR90/secure-storage/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/XzaR90/secure-storage/actions/workflows/codeql-analysis.yml)
@@ -22,7 +23,7 @@ npm install @xzar90/secure-storage
 ## Usage
 
 ```ts
-import SecureStorage from '@xzar90/secure-storage';
+import { SecureStorage } from '@xzar90/secure-storage';
 
 const secureStorage = await SecureStorage.createAsync({}); //default settings
 //{

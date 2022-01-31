@@ -1,11 +1,10 @@
 {
     "name": "@xzar90/secure-storage",
-    "version": "2.0.6",
+    "version": "2.0.7",
     "description": "Secure localStorage data with high level of encryption",
     "main": "dist/secure-storage.cjs.js",
     "module": "dist/secure-storage.mjs",
-    "browser": "dist/secure-storage.umd.js",
-    "types": "dist/secure-storage.mjs.d.ts",
+    "types": "types",
     "type": "module",
     "files": [
         "dist",
@@ -50,13 +49,8 @@
     },
     "homepage": "https://github.com/xzar90/secure-storage",
     "dependencies": {
-        "@fingerprintjs/fingerprintjs": ">= 3.3.2",
-        "crypto-es": ">= 1.2.7",
-        "js-cookie": ">= 3.0.1"
-    },
-    "peerDependencies": {
-        "@fingerprintjs/fingerprintjs": ">= 3.3.2",
-        "crypto-es": ">= 1.2.7",
-        "js-cookie": ">= 3.0.1"
+        "@fingerprintjs/fingerprintjs": "~3.3.2",
+        "crypto-es": "~1.2.7",
+        "js-cookie": "~3.0.1"
     }
 }

@@ -1,5 +1,5 @@
 import CryptoES from 'crypto-es';
-import { IKeySaltPair } from 'src/interfaces/IKeySaltPair';
+import { IKeySaltPair } from '../interfaces/IKeySaltPair';
 
 const _generateSecretKey = (secretPhrase: string, salt: CryptoES.lib.WordArray) => {
     const key128Bits = CryptoES.PBKDF2(secretPhrase, salt, { keySize: 128 / 32 });

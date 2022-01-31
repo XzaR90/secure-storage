@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         // Target latest version of ECMAScript.
-        "target": "esnext",
+        "target": "es2018",
         "module": "esnext",
         "lib": ["es5", "es6", "dom", "esnext"],
         // Search under node_modules for non-relative imports.
@@ -18,10 +18,11 @@
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
         "declaration": true,
-        "declarationDir": "dist/dts",
-        "outDir": "dist",
-        "baseUrl": ".",
-        "sourceMap": true
+        "noEmit": true,
+        "declarationDir": "types",
+        "outDir": "out-tsc",
+        "sourceMap": true,
+        "rootDir": "./src"
     },
     "files": ["src/SecureStorageFactory.ts"],
     "include": ["src"],

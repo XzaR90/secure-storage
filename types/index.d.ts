@@ -1,2 +1,2 @@
 import SecureStorageFactory from './SecureStorageFactory';
-export const SecureStorage = new SecureStorageFactory();
+export declare const SecureStorage: SecureStorageFactory;

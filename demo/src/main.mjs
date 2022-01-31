@@ -1,8 +1,4 @@
-require('@fingerprintjs/fingerprintjs');
-require('js-cookie');
-require('crypto-es');
-
-const SecureStorage = require('@xzar90/secure-storage');
+import { SecureStorage } from '@xzar90/secure-storage';
 
 console.log(SecureStorage);
 SecureStorage.createAsync().then((storage) => {
