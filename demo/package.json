@@ -18,7 +18,7 @@
     "devDependencies": {
         "@babel/core": "^7.16.12",
         "@babel/preset-env": "^7.16.11",
-        "babel-loader": "^8.2.3",
+        "babel-loader": "^8.3.0",
         "copy-webpack-plugin": "^10.2.1",
         "serve": "^13.0.2",
         "webpack": "^5.67.0",
